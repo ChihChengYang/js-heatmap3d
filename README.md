@@ -10,7 +10,7 @@ Convert a 2D heatmap into a 3D Model observes the heatmap of objects from X,Y,Z 
  
 ##  Reference
 
- #### Constructor
+ #### Constructor 
   ```js
   var j_heatmap3d = new heatmap3d.create();
   ```		
