@@ -1,4 +1,3 @@
-
 ================ 
 heatmap3D
 ================
@@ -8,35 +7,35 @@ Convert a 2D heatmap into a 3D Model observes the heatmap of objects from X,Y,Z 
  
 ##  Reference
 
- ### Constructor 
+###  Constructor 
  
- ```js
+  ```js
   var j_heatmap3d = new heatmap3d.create();
   ```		
   
- ### Create 2d heatmap canvas
+###  Create 2d heatmap canvas
 
- ```js
+  ```js
   j_heatmap3d.createHeatmap2dCanvases( width, height, length, viewDirection, interval, index)
   ```	
 
-  * width: space  width (relate to X)
-  * height: space  height (relate to Y)
-  * length: space  length (relate to Z)
-  * viewDirection: view direction from X,Y,Z
-  * interval: length of space slice
-  * index: which interval
+   * width: space  width (relate to X)
+   * height: space  height (relate to Y)
+   * length: space  length (relate to Z)
+   * viewDirection: view direction from X,Y,Z
+   * interval: length of space slice
+   * index: which interval
   
- ### Create the mesh from 2d heatmap canvas
+###  Create the mesh from 2d heatmap canvas
 
- ```js
+  ```js
    j_heatmap3d.createCanvasMesh(canvas, width, height, length, viewDirection, intervalPos, transparentFlag);
   ```	
 
-  * intervalPos: position of space slice (interval multiply by index)
-  * transparentFlag: transparent canvas true or false
+   * intervalPos: position of space slice (interval multiply by index)
+   * transparentFlag: transparent canvas true or false
   
- ### Add objects' data
+### Add objects' data
 
   Json format 
 
