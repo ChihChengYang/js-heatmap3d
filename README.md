@@ -59,7 +59,7 @@ Convert a 2D heatmap into a 3D Model observes the heatmap of objects from X,Y,Z 
   
 ##  Demo
 	
-	http://chihchengyang.github.io/js-heatmap3d/
+	[a link](http://chihchengyang.github.io/js-heatmap3d/)
 	
 	* Press the 'Move' button repeatedly...
 	* Press mouse left button on canvas to control the camera...
