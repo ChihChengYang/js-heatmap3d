@@ -5,7 +5,6 @@
 */
 var heatmap2d = (function() { 
 
-    var canvas;	
     var viewInterval = 10;  
     var viewIndex = 3;    
 	var temperatureFade = false;
@@ -20,7 +19,7 @@ var heatmap2d = (function() {
         var radiusValue = 10;
         var blurValue = 10;       
 
-        canvas = document.createElement('canvas');
+        this.canvas = document.createElement('canvas');
         var realWidth, realHeight;
         
         if(viewDirection==1){          
@@ -38,10 +37,10 @@ var heatmap2d = (function() {
         
         heat2Darray = ArrayMatrix(realWidth,realHeight,1);
 
-        canvas.width = realWidth;
-        canvas.height = realHeight;
+        this.canvas.width = realWidth;
+        this.canvas.height = realHeight;
 
-        var heat = simpleheat(canvas), frame;
+        var heat = simpleheat(this.canvas), frame;
  
         window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
                                window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -243,9 +242,9 @@ var heatmap2d = (function() {
             heatDataMapping( jsonObj.nodes, nodesCount );  
         }
 
-        if(canvas){
+        if(this.canvas){
             
-            canvas.addEventListener('mousemove', function(event) {
+            this.canvas.addEventListener('mousemove', function(event) {
                 var x = event.offsetX || event.clientX;
                 var y = event.offsetY || event.clientY; 
             }, false);
@@ -259,40 +258,30 @@ var heatmap2d = (function() {
                 frame = frame || window.requestAnimationFrame(draw);
             }
             
-            canvas.addEventListener("mousedown", doMouseDown, false);  
+            this.canvas.addEventListener("mousedown", doMouseDown, false);  
 
         }
 
-       //Listen to proxy responses
-        window.addEventListener(
-            "message", 
-            onReceiveResponse,
-            false
-        );
-
-        function onReceiveResponse(event) {
-            var data = event.data;
-        }
-
-        function sendRequestToProxy(){
-                var urlToGet = "http://localhost:9001"; //can be any HTTP request in the 3001 origin
-                var proxyParameters = {
-                    url : urlToGet
-                };
-                var originOfProxy = 'http://localhost:9001';   
-                 document.getElementById("proxy").contentWindow.postMessage(proxyParameters, originOfProxy);  
+    	function ajax(url,data) {
+            return  $.ajax({
+                    type:"POST",
+                    url: url,
+                    data: data,
+                    async:false
+                    });
         }
  
         this.receivData = function() { 
-            $.post( "http://127.0.0.1:8080/T",
-                    {name:"ravi",age:"31"},
-                    function(data, textStatus, jqXHR){ 
-                        //data: Received from server
-                    });
+            var aa;
+            ajax(url,data).done(function(result) {
+                aa=result;
+            }).fail(function() {
+            }); 
+            return aa;        
         }
 
         this.getContext = function()  { 
-             return canvas;
+             return this.canvas;
         }
         
         this.dataAdd = function( data ) {
