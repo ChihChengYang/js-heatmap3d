@@ -72,17 +72,18 @@ simpleheat.prototype = {
         this._grad = ctx.getImageData(0, 0, 1, 256).data;
         return this;
     },
-	scaleContext: function (invRatio) {
+    scaleContext: function (invRatio) {		
 	    var tempCanvas = document.createElement('canvas');
+	    var oriWidth = tempCanvas.width = this._canvas.width;
+        var oriHeight = tempCanvas.height = this._canvas.height;       
 		var tempCanvasCtx = tempCanvas.getContext('2d');
-        var oriWidth = this._canvas.width;
-        var oriHeight = this._canvas.height; 
+       // this.tempCanvasCtx.clearRect(0, 0, this._width, this._height);  
         tempCanvasCtx.drawImage(this._canvas, 0, 0); 
         tempCanvas.width = oriWidth * invRatio;
         tempCanvas.height = oriHeight * invRatio;
-    	tempCanvasCtx.drawImage(tempCanvas, 0, 0, oriWidth, oriHeight, 0, 0,  tempCanvas.width , tempCanvas.height);  
-		return tempCanvas;
-	},
+    	tempCanvasCtx.drawImage(this._canvas, 0, 0, oriWidth, oriHeight, 0, 0,  tempCanvas.width , tempCanvas.height);  
+        return tempCanvas; 
+    },
     draw: function (minOpacity) {
         if (!this._circle) {
             this.radius(this.defaultRadius);
